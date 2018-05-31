@@ -11,6 +11,9 @@ using char_type = std::int8_t;
 using bool_type = std::int8_t;
 using command_type = int_type;
 
+constexpr bool_type FALSE_CONSTANT = 0;
+constexpr bool_type TRUE_CONSTANT = 1;
+
 constexpr auto int_size = sizeof(int_type);
 constexpr auto long_size = sizeof(long_type);
 constexpr auto float_size = sizeof(float_type);

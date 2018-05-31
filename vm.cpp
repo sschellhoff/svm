@@ -28,42 +28,78 @@ void VM::executeCommand() {
       memory.push(a+b);
     }
     break;
-    /*case Commands::SUB: {
+    case Commands::SUB: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push(a-b);
     }
     break;
     case Commands::MULT: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push(a*b);
     }
     break;
     case Commands::DIV: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push(a/b);
     }
     break;
     case Commands::MOD: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push(a%b);
     }
     break;
     case Commands::AND: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push(a&b);
     }
     break;
     case Commands::OR: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push(a|b);
     }
     break;
     case Commands::EQ: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push((a==b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
     case Commands::NEQ: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push((a!=b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
     case Commands::LE: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push((a<=b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
     case Commands::LT: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push((a<b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
     case Commands::GE: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push((a>=b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
     case Commands::GT: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push((a>b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
-    break;*/
+    break;
     default:
     // RUNTIME ERROR
     std::cerr << "unknown command: " << IR << std::endl;
