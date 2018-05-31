@@ -161,6 +161,9 @@ void VM::executeCommand() {
       }
     }
     break;
+    case Commands::DUP:
+    memory.dup();
+    break;
     default:
     // RUNTIME ERROR
     std::cerr << "unknown command: " << IR << std::endl;

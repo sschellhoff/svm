@@ -27,5 +27,6 @@ enum Commands : command_type {
   NEG,
   NOT,
   JMP,
-  JMPZ
+  JMPZ,
+  DUP
 };
