@@ -52,25 +52,25 @@ void VM::executeCommand() {
       memory.push(a%b);
     }
     break;
-    case Commands::AND: {
+    case Commands::AND_B: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a&b);
     }
     break;
-    case Commands::OR: {
+    case Commands::OR_B: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a|b);
     }
     break;;
-    case Commands::XOR: {
+    case Commands::XOR_B: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a^b);
     }
     break;
-    case Commands::NOT: {
+    case Commands::NOT_B: {
       const auto a = memory.pop();
       memory.push(~a);
     }
