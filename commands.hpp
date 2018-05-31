@@ -12,6 +12,7 @@ enum Commands : command_type {
   MOD,
   AND,
   OR,
+  XOR,
   EQ,
   NEQ,
   LE,

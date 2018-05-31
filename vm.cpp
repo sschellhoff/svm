@@ -63,6 +63,12 @@ void VM::executeCommand() {
       const auto a = memory.pop();
       memory.push(a|b);
     }
+    break;;
+    case Commands::XOR: {
+      const auto b = memory.pop();
+      const auto a = memory.pop();
+      memory.push(a^b);
+    }
     break;
     case Commands::EQ: {
       const auto b = memory.pop();
