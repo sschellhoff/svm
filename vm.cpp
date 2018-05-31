@@ -116,6 +116,11 @@ void VM::executeCommand() {
       memory.push(-a);
     }
     break;
+    case Commands::NOT: {
+      const auto a = memory.pop();
+      memory.push((a == FALSE_CONSTANT) ? TRUE_CONSTANT : FALSE_CONSTANT);
+    }
+    break;
     default:
     // RUNTIME ERROR
     std::cerr << "unknown command: " << IR << std::endl;

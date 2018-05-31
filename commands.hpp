@@ -20,5 +20,6 @@ enum Commands : command_type {
   LT,
   GE,
   GT,
-  NEG
+  NEG,
+  NOT
 };
