@@ -13,6 +13,14 @@ int_type Stack::pop() {
   return *SP;
 }
 
+int_type Stack::load(int_type address) {
+  return *(data+address);
+}
+
+void Stack::store(int_type address, int_type value) {
+  *(data+address) = value;
+}
+
 void Stack::reserveStackSpace(int_type size) {
   SP += size;
 }

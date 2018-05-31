@@ -30,9 +30,21 @@ void VM::executeCommand() {
     }
     break;
     case Commands::LOADC: {
-      fetchCommand(); // fetch constants address
+      fetchCommand(); // fetch constant
       auto constant = IR; // get constant
       memory.push(constant);
+    }
+    break;
+    case Commands::LOAD: {
+      auto var_addr = memory.pop();
+      auto value = memory.load(var_addr);
+      memory.push(value);
+    }
+    break;
+    case Commands::STORE: {
+      auto var_addr = memory.pop();
+      auto value = memory.pop();
+      memory.store(var_addr, value);
     }
     break;
     case Commands::ADD: {

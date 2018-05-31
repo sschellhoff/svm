@@ -7,6 +7,8 @@ enum Commands : command_type {
   PUSH,
   POP,
   LOADC,
+  LOAD,
+  STORE,
   ADD,
   SUB,
   MULT,
