@@ -4,6 +4,8 @@
 
 enum Commands : command_type {
   HALT = 0,
+  PUSH,
+  POP,
   LOADC,
   ADD,
   SUB,

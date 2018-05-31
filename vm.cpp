@@ -17,10 +17,22 @@ void VM::executeCommand() {
     case Commands::HALT:
       is_running = false;
     break;
+    case Commands::PUSH: {
+      fetchCommand(); // fetch value
+      auto size = IR; // get value
+      memory.reserveStackSpace(size);
+    }
+    break;
+    case Commands::POP: {
+      fetchCommand(); // fetch value
+      auto size = IR; // get value
+      memory.removeStackSpace(size);
+    }
+    break;
     case Commands::LOADC: {
       fetchCommand(); // fetch constants address
       auto constant = IR; // get constant
-      memory.push(constant); // push constant on stack
+      memory.push(constant);
     }
     break;
     case Commands::ADD: {

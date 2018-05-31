@@ -13,6 +13,14 @@ int_type Stack::pop() {
   return *SP;
 }
 
+void Stack::reserveStackSpace(int_type size) {
+  SP += size;
+}
+
+void Stack::removeStackSpace(int_type size) {
+  SP -= size;
+}
+
 bool Stack::isEmpty() const {
   return SP == data;
 }

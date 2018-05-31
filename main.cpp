@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[]) {
   VM vm;
-  vm.setProgram({Commands::LOADC, 13, Commands::LOADC, 37, Commands::ADD, Commands::LOADC, 8, Commands::SUB, LOADC, 42, Commands::EQ, Commands::HALT});
+  vm.setProgram({Commands::PUSH, 2, Commands::POP, 2, Commands::HALT});
 
   vm.debugProgram();
 

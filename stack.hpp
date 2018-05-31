@@ -10,6 +10,10 @@ struct Stack {
   Stack();
   void push(int_type value);
   int_type pop();
+
+  void reserveStackSpace(int_type size);
+  void removeStackSpace(int_type size);
+
   bool isEmpty() const;
   void reset();
 };
