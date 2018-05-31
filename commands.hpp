@@ -13,10 +13,12 @@ enum Commands : command_type {
   AND,
   OR,
   XOR,
+  NOT,
   EQ,
   NEQ,
   LE,
   LT,
   GE,
-  GT
+  GT,
+  NEG
 };

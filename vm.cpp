@@ -70,6 +70,11 @@ void VM::executeCommand() {
       memory.push(a^b);
     }
     break;
+    case Commands::NOT: {
+      const auto a = memory.pop();
+      memory.push(~a);
+    }
+    break;
     case Commands::EQ: {
       const auto b = memory.pop();
       const auto a = memory.pop();
@@ -104,6 +109,11 @@ void VM::executeCommand() {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push((a>b) ? TRUE_CONSTANT : FALSE_CONSTANT);
+    }
+    break;
+    case Commands::NEG: {
+      const auto a = memory.pop();
+      memory.push(-a);
     }
     break;
     default:
