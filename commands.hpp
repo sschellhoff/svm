@@ -25,5 +25,7 @@ enum Commands : command_type {
   GE,
   GT,
   NEG,
-  NOT
+  NOT,
+  JMP,
+  JMPZ
 };

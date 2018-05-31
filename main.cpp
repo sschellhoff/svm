@@ -5,6 +5,11 @@
 int main(int argc, char* argv[]) {
   VM vm;
   vm.setProgram({
+    Commands::LOADC, 0,
+    Commands::JMPZ, 7,
+    Commands::PUSH,
+    Commands::PUSH,
+    Commands::PUSH,
     Commands::PUSH, 2,
     Commands::LOADC, 13,
     Commands::LOADC, 1,

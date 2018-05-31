@@ -18,6 +18,7 @@ private:
   void executeCommand();
 
   void printStack() const;
+  void printRegisters() const;
 public:
   VM();
 

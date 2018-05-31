@@ -146,6 +146,21 @@ void VM::executeCommand() {
       memory.push((a == FALSE_CONSTANT) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
+    case Commands::JMP: {
+      fetchCommand();
+      auto target = IR;
+      IP = &program[0] + target;
+    }
+    break;
+    case Commands::JMPZ: {
+      fetchCommand();
+      auto target = IR;
+      auto condition = memory.pop();
+      if(condition == FALSE_CONSTANT) {
+        IP = &program[0] + target;
+      }
+    }
+    break;
     default:
     // RUNTIME ERROR
     std::cerr << "unknown command: " << IR << std::endl;
@@ -182,10 +197,15 @@ void VM::runProgram() {
 void VM::debugProgram() {
   CommandLineInterface cli;
   cli.registerCommand("stack", [this]() { this->printStack(); });
+  cli.registerCommand("run", [this]() { this->runProgram(); });
+  cli.registerCommand("step", [this]() { this->executeStep(); });
+  cli.registerCommand("s", [this]() { this->executeStep(); });
+  cli.registerCommand("registers", [this]() { this->printRegisters(); });
+  cli.registerCommand("reg", [this]() { this->printRegisters(); });
+  cli.registerCommand("info", [this]() { this->printRegisters(); this->printStack(); });
   cli.registerCommand("", []() { });
   while(is_running) {
     cli.nextCommand();
-    executeStep();
   }
   std::cout << "Program done" << std::endl;
   cli.nextCommand();
@@ -201,4 +221,10 @@ void VM::printStack() const {
     std::cout << *i << " ";
   }
   std::cout << "]" << std::endl;
+}
+
+void VM::printRegisters() const {
+  std::cout << "IP: " << (IP - &program[0]) << std::endl
+  << "IR: " << IR << std::endl
+  << "SP: " << (memory.SP - memory.data) << std::endl;
 }
