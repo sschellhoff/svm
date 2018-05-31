@@ -1,6 +1,7 @@
 #include "vm.hpp"
 #include "commands.hpp"
 #include <iostream>
+#include "command_line_interface.hpp"
 
 VM::VM() : is_running(false) {
   memory.push(0);
@@ -155,11 +156,15 @@ void VM::runProgram() {
 }
 
 void VM::debugProgram() {
+  CommandLineInterface cli;
+  cli.registerCommand("stack", [this]() { this->printStack(); });
+  cli.registerCommand("", []() { });
   while(is_running) {
-    printStack();
+    cli.nextCommand();
     executeStep();
   }
-  printStack();
+  std::cout << "Program done" << std::endl;
+  cli.nextCommand();
 }
 
 bool VM::isRunning() const {
