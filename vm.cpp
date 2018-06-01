@@ -14,145 +14,145 @@ void VM::fetchCommand() {
 
 void VM::executeCommand() {
   switch(IR) {
-    case Commands::HALT:
+    case Command::HALT:
       is_running = false;
     break;
-    case Commands::PUSH: {
+    case Command::PUSH: {
       fetchCommand(); // fetch value
       auto size = IR; // get value
       memory.reserveStackSpace(size);
     }
     break;
-    case Commands::POP: {
+    case Command::POP: {
       fetchCommand(); // fetch value
       auto size = IR; // get value
       memory.removeStackSpace(size);
     }
     break;
-    case Commands::LOADC: {
+    case Command::LOADC: {
       fetchCommand(); // fetch constant
       auto constant = IR; // get constant
       memory.push(constant);
     }
     break;
-    case Commands::LOAD: {
+    case Command::LOAD: {
       auto var_addr = memory.pop();
       auto value = memory.load(var_addr);
       memory.push(value);
     }
     break;
-    case Commands::STORE: {
+    case Command::STORE: {
       auto var_addr = memory.pop();
       auto value = memory.pop();
       memory.store(var_addr, value);
     }
     break;
-    case Commands::ADD: {
+    case Command::ADD: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a+b);
     }
     break;
-    case Commands::SUB: {
+    case Command::SUB: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a-b);
     }
     break;
-    case Commands::MULT: {
+    case Command::MULT: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a*b);
     }
     break;
-    case Commands::DIV: {
+    case Command::DIV: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a/b);
     }
     break;
-    case Commands::MOD: {
+    case Command::MOD: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a%b);
     }
     break;
-    case Commands::AND_B: {
+    case Command::AND_B: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a&b);
     }
     break;
-    case Commands::OR_B: {
+    case Command::OR_B: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a|b);
     }
     break;;
-    case Commands::XOR_B: {
+    case Command::XOR_B: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push(a^b);
     }
     break;
-    case Commands::NOT_B: {
+    case Command::NOT_B: {
       const auto a = memory.pop();
       memory.push(~a);
     }
     break;
-    case Commands::EQ: {
+    case Command::EQ: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push((a==b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
-    case Commands::NEQ: {
+    case Command::NEQ: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push((a!=b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
-    case Commands::LE: {
+    case Command::LE: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push((a<=b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
-    case Commands::LT: {
+    case Command::LT: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push((a<b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
-    case Commands::GE: {
+    case Command::GE: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push((a>=b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
-    case Commands::GT: {
+    case Command::GT: {
       const auto b = memory.pop();
       const auto a = memory.pop();
       memory.push((a>b) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
-    case Commands::NEG: {
+    case Command::NEG: {
       const auto a = memory.pop();
       memory.push(-a);
     }
     break;
-    case Commands::NOT: {
+    case Command::NOT: {
       const auto a = memory.pop();
       memory.push((a == FALSE_CONSTANT) ? TRUE_CONSTANT : FALSE_CONSTANT);
     }
     break;
-    case Commands::JMP: {
+    case Command::JMP: {
       fetchCommand();
       auto target = IR;
       IP = &program[0] + target;
     }
     break;
-    case Commands::JMPZ: {
+    case Command::JMPZ: {
       fetchCommand();
       auto target = IR;
       auto condition = memory.pop();
@@ -161,7 +161,7 @@ void VM::executeCommand() {
       }
     }
     break;
-    case Commands::DUP:
+    case Command::DUP:
     memory.dup();
     break;
     default:

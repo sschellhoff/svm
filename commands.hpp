@@ -2,7 +2,7 @@
 
 #include "types.hpp"
 
-enum Commands : command_type {
+enum Command : command_type {
   HALT = 0,
   PUSH,
   POP,

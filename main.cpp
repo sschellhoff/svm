@@ -5,9 +5,9 @@
 int main(int argc, char* argv[]) {
   VM vm;
   vm.setProgram({
-    Commands::LOADC, 13,
-    Commands::DUP,
-    Commands::HALT
+    Command::LOADC, 13,
+    Command::DUP,
+    Command::HALT
   });
 
   vm.debugProgram();
