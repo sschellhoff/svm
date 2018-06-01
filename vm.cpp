@@ -1,7 +1,6 @@
 #include "vm.hpp"
 #include "commands.hpp"
 #include <iostream>
-#include "command_line_interface.hpp"
 
 VM::VM() : is_running(false) {
   memory.push(0);
