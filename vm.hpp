@@ -29,7 +29,7 @@ public:
 
   void executeStep();
 
-  void runProgram();
+  void run();
 
   bool isRunning() const;
 };

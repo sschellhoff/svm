@@ -1,8 +1,8 @@
-#include "debugger.hpp"
+#include "vm.hpp"
 #include "generator.hpp"
 
 int main(int argc, char* argv[]) {
-  Debugger vm;
+  VM vm;
   // a = b + b * c
   // with addr(a) = 1, addr(b) = 2, addr(c) = 3
   // with value(a) = undefined, value(b) = 3, value(c) = 7

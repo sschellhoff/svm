@@ -191,7 +191,7 @@ void VM::executeStep() {
   executeCommand();
 }
 
-void VM::runProgram() {
+void VM::run() {
   while(is_running) {
     executeStep();
   }
