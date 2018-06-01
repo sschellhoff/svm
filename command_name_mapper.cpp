@@ -2,38 +2,35 @@
 #include <map>
 
 #define MAKE_TO_STRING_PAIR(name) {Command::name, ""#name}
+#define MAKE_TO_NAME_PAIR(name) {""#name, Command::name}
 
-/*
-PUSH,
-POP,
-LOADC,
-LOAD,
-STORE,
-ADD,
-SUB,
-MULT,
-DIV,
-MOD,
-AND_B,
-OR_B,
-XOR_B,
-NOT_B,
-EQ,
-NEQ,
-LE,
-LT,
-GE,
-GT,
-NEG,
-NOT,
-JMP,
-JMPZ,
-DUP
-
-*/
 const static std::map<std::string, Command> name_command = {
-  {"halt", Command::HALT},
-  {"HALT", Command::HALT}
+  MAKE_TO_NAME_PAIR(HALT),
+  MAKE_TO_NAME_PAIR(PUSH),
+  MAKE_TO_NAME_PAIR(POP),
+  MAKE_TO_NAME_PAIR(LOADC),
+  MAKE_TO_NAME_PAIR(LOAD),
+  MAKE_TO_NAME_PAIR(STORE),
+  MAKE_TO_NAME_PAIR(ADD),
+  MAKE_TO_NAME_PAIR(SUB),
+  MAKE_TO_NAME_PAIR(MULT),
+  MAKE_TO_NAME_PAIR(DIV),
+  MAKE_TO_NAME_PAIR(MOD),
+  MAKE_TO_NAME_PAIR(AND_B),
+  MAKE_TO_NAME_PAIR(OR_B),
+  MAKE_TO_NAME_PAIR(XOR_B),
+  MAKE_TO_NAME_PAIR(NOT_B),
+  MAKE_TO_NAME_PAIR(EQ),
+  MAKE_TO_NAME_PAIR(NEQ),
+  MAKE_TO_NAME_PAIR(LE),
+  MAKE_TO_NAME_PAIR(LT),
+  MAKE_TO_NAME_PAIR(GE),
+  MAKE_TO_NAME_PAIR(GT),
+  MAKE_TO_NAME_PAIR(NEG),
+  MAKE_TO_NAME_PAIR(NOT),
+  MAKE_TO_NAME_PAIR(JMP),
+  MAKE_TO_NAME_PAIR(JMPZ),
+  MAKE_TO_NAME_PAIR(DUP)
 };
 
 const static std::map<Command, std::string> command_name = {
