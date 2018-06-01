@@ -6,6 +6,7 @@
 
 class VM {
 private:
+  friend class Debugger;
   std::vector<command_type> program;
   command_type* IP;
   std::size_t IR;
@@ -29,8 +30,6 @@ public:
   void executeStep();
 
   void runProgram();
-
-  void debugProgram();
 
   bool isRunning() const;
 };
