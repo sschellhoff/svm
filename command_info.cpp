@@ -1,5 +1,7 @@
-#include "command_name_mapper.hpp"
+#include "command_info.hpp"
 #include <map>
+#include <vector>
+#include <algorithm>
 
 #define MAKE_TO_STRING_PAIR(name) {Command::name, ""#name}
 #define MAKE_TO_NAME_PAIR(name) {""#name, Command::name}
@@ -62,12 +64,20 @@ const static std::map<Command, std::string> command_name = {
   MAKE_TO_STRING_PAIR(DUP)
 };
 
+const static std::vector<Command> has_parameter = {
+  Command::PUSH, Command::POP, Command::LOADC, Command::JMP, Command::JMPZ
+};
+
 bool doesCommandExist(const std::string &command) {
   return name_command.find(command) != name_command.end();
 }
 
 bool doesCommandExist(Command command) {
   return command_name.find(command) != command_name.end();
+}
+
+bool hasParameter(Command command) {
+  return std::find(has_parameter.begin(), has_parameter.end(), command) != has_parameter.end();
 }
 
 std::string translateCommand(Command command) {
