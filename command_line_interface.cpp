@@ -20,3 +20,9 @@ void CommandLineInterface::nextCommand() {
   }
   callbacks[command]();
 }
+
+void CommandLineInterface::printHelp() {
+  for(const auto &[key, value] : callbacks) {
+    std::cout << key << std::endl;
+  }
+}

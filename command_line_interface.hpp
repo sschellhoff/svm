@@ -10,4 +10,5 @@ private:
 public:
   void registerCommand(const std::string &command, std::function<void()> function);
   void nextCommand();
+  void printHelp();
 };

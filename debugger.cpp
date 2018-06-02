@@ -3,6 +3,7 @@
 #include "command_info.hpp"
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 void Debugger::setProgram(std::vector<command_type> program) {
   vm.setProgram(program);
@@ -10,19 +11,20 @@ void Debugger::setProgram(std::vector<command_type> program) {
 
 void Debugger::run() {
   CommandLineInterface cli;
-  //cli.registerCommand("continue", [this]() { this->toNextBreakpoint(); });
-  //cli.registerCommand("c", [this]() { this->toNextBreakpoint(); });
-  //cli.registerCommand("quit", [this]() { this->quitProgram(); });
-  //cli.registerCommand("restart", [this]() { this->restartProgram(); });
-  //cli.registerCommand("r", [this]() { this->restartProgram(); });
+  cli.registerCommand("help", [&]() { cli.printHelp(); });
+  cli.registerCommand("h", [&]() { cli.printHelp(); });
+  cli.registerCommand("continue", [this]() { this->runUntilBreakpoint(); });
+  cli.registerCommand("c", [this]() { this->runUntilBreakpoint(); });
   cli.registerCommand("step", [this]() { this->debugStep(); });
   cli.registerCommand("s", [this]() { this->debugStep(); });
-  cli.registerCommand("printStack", [this]() { this->vm.printStack(); });
-  cli.registerCommand("ps", [this]() { this->vm.printStack(); });
-  cli.registerCommand("printRegisters", [this]() { this->vm.printRegisters(); });
-  cli.registerCommand("pr", [this]() { this->vm.printRegisters(); });
-  cli.registerCommand("printAll", [this]() { this->vm.printRegisters(); this->vm.printStack(); });
-  cli.registerCommand("pa", [this]() { this->vm.printRegisters(); this->vm.printStack(); });
+  cli.registerCommand("break", [this]() { this->registerBreakpoint(); });
+  cli.registerCommand("b", [this]() { this->registerBreakpoint(); });
+  cli.registerCommand("quit", [this]() { this->quitProgram(); });
+  cli.registerCommand("restart", [this]() { this->restartProgram(); });
+  cli.registerCommand("inspect", [this]() { this->printCurrentCommand(); });
+  cli.registerCommand("stack", [this]() { this->vm.printStack(); });
+  cli.registerCommand("registers", [this]() { this->vm.printRegisters(); });
+  cli.registerCommand("show", [this]() { this->vm.printRegisters(); this->vm.printStack(); this->printCurrentCommand(); });
   cli.registerCommand("", []() { });
   while(vm.is_running) {
     cli.nextCommand();
@@ -32,17 +34,52 @@ void Debugger::run() {
 }
 
 void Debugger::debugStep() {
-  printCommand(vm.IP);
+  printCurrentCommand();
   vm.fetchCommand();
   vm.executeCommand();
+}
+
+void Debugger::runUntilBreakpoint() {
+  while(vm.is_running) {
+    auto address = vm.IP;
+    if(std::find(breakpoints.begin(), breakpoints.end(), address) != breakpoints.end()) {
+      return;
+    }
+    vm.executeStep();
+  }
+}
+
+void Debugger::restartProgram() {
+  vm.restartProgram();
+}
+
+void Debugger::quitProgram() {
+  vm.is_running = false;
 }
 
 void Debugger::printCommand(command_type* command_pos) {
   auto command = *command_pos;
   Command com = static_cast<Command>(command);
   if(doesCommandExist(com)) {
-    std::cout << translateCommand(com) << " " << (hasParameter(com) ? std::to_string(*(command_pos + 1)) : "") << std::endl;
+    std::cout << "[" << std::to_string(command_pos - &vm.program[0]) << "] " << translateCommand(com) << " " << (hasParameter(com) ? std::to_string(*(command_pos + 1)) : "") << std::endl;
   } else {
     std::cout << "Unknown command: " << command << std::endl;
   }
+}
+
+void Debugger::printCurrentCommand() {
+  printCommand(vm.IP);
+}
+
+void Debugger::registerBreakpoint() {
+  std::cout << "Address: ";
+  command_type breakpoint;
+  if(std::cin >> breakpoint) {
+    breakpoints.push_back(&vm.program[0] + breakpoint);
+      std::cout << "registered breakpoint at " << breakpoint << std::endl;
+  } else {
+    std::cout << "Value is no breakpoint!" << std::endl;
+  }
+  std::cin.clear();
+  std::cin.ignore(INT_MAX, '\n');
 }
