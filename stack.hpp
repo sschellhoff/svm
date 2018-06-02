@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.hpp"
+#include <cstddef>
 
 struct Stack {
   static constexpr std::size_t MAX_ADDRESS = 1048576; // 4mb, (word-size: 4 byte)
