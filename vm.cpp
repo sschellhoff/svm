@@ -40,10 +40,30 @@ void VM::executeCommand() {
       memory.push(value);
     }
     break;
+    case Command::LOADN: {
+      fetchCommand(); // fetch n
+      auto n = IR; // get n
+      auto var_addr = memory.pop();
+      for(auto i = 0; i < n; i++) {
+        auto value = memory.load(var_addr + i);
+        memory.push(value);
+      }
+    }
+    break;
     case Command::STORE: {
       auto var_addr = memory.pop();
       auto value = memory.pop();
       memory.store(var_addr, value);
+    }
+    break;
+    case Command::STOREN: {
+      fetchCommand(); // fetch n
+      auto n = IR; // get n
+      auto var_addr = memory.pop();
+      for(int i = n - 1; i >= 0; i--) {
+        auto value = memory.pop();
+        memory.store(var_addr + i, value);
+      }
     }
     break;
     case Command::ADD: {
