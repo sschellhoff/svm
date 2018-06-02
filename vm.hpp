@@ -19,6 +19,7 @@ private:
   void executeCommand();
 
   void printStack() const;
+  void printHeap() const;
   void printRegisters() const;
 public:
   VM();

@@ -235,8 +235,20 @@ void VM::printStack() const {
   std::cout << "]" << std::endl;
 }
 
+void VM::printHeap() const {
+  std::cout << "[ ";
+  if(memory.heapEntries.size() > 0) {
+    auto start = memory.heapEntries[0].address;
+    for(auto i = memory.data + start; i <= memory.data + memory.MAX_ADDRESS; i++) {
+      std::cout << *i << " ";
+    }
+  }
+  std::cout << "]" << std::endl;
+}
+
 void VM::printRegisters() const {
   std::cout << "IP: " << (IP - &program[0]) << std::endl
   << "IR: " << IR << std::endl
-  << "SP: " << (memory.SP - memory.data) << std::endl;
+  << "SP: " << (memory.SP - memory.data)
+  << "HP: " << (memory.HP - memory.data) << std::endl;
 }
