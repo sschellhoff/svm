@@ -2,7 +2,7 @@
 #include <functional>
 #include <cstring>
 
-Stack::Stack() : SP(data), HP(SP + MAX_ADDRESS / 2) {
+Stack::Stack() : SP(data), HP(SP + MAX_ADDRESS + 1) {
 }
 
 void Stack::push(int_type value) {
@@ -36,7 +36,7 @@ void Stack::removeStackSpace(int_type size) {
 }
 
 int_type Stack::reserveHeapSpace(int_type size) {
-  auto last = MAX_ADDRESS + 1; // top
+  auto last = MAX_ADDRESS + 1;
 
   for(const auto &entry : heapEntries) {
     if(last - (entry.address + entry.size) >= size) {
@@ -48,6 +48,13 @@ int_type Stack::reserveHeapSpace(int_type size) {
       return newEntry.address;
     }
   }
+  HP -= size;
+  HeapData newEntry;
+  newEntry.address = HP - data;
+  newEntry.size = size;
+  heapEntries.push_back(newEntry);
+  std::sort(heapEntries.begin(), heapEntries.end(), [](HeapData a, HeapData b) { return a.address > b.address; });
+  return newEntry.address;
 
   return 0;
 }
