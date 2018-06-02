@@ -160,6 +160,13 @@ void VM::executeCommand() {
       }
     }
     break;
+    case Command::JMPI: {
+      fetchCommand();
+      auto targetBase = IR;
+      auto relative = memory.pop();
+      IP = &program[0] + targetBase + relative;
+    }
+    break;
     case Command::DUP:
     memory.dup();
     break;

@@ -28,5 +28,6 @@ enum Command : command_type {
   NOT,
   JMP,
   JMPZ,
+  JMPI,
   DUP
 };

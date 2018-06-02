@@ -111,7 +111,6 @@ std::vector<command_type> assemble(const std::string & program) {
       break;
       case TokenType::SOURCE: {
         auto source = tokens[pos].value.str;
-        std::cout << "SOURCE: " << source << std::endl;
         if(label_positions.find(source) != label_positions.end()) {
           result.push_back(label_positions.find(source)->second);
         } else {
@@ -136,6 +135,9 @@ std::vector<command_type> assemble(const std::string & program) {
   }
   if(unknown_label_positions.size() > 0) {
     std::cerr << "There are are missing targets" << std::endl;
+    for(const auto &[key, value] : unknown_label_positions) {
+      std::cerr << key << std::endl;
+    }
   }
 
   return result;
