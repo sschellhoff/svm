@@ -35,7 +35,9 @@ const static std::map<std::string, Command> name_command = {
   MAKE_TO_NAME_PAIR(JMP),
   MAKE_TO_NAME_PAIR(JMPZ),
   MAKE_TO_NAME_PAIR(JMPI),
-  MAKE_TO_NAME_PAIR(DUP)
+  MAKE_TO_NAME_PAIR(ALLOC),
+  MAKE_TO_NAME_PAIR(FREE),
+  MAKE_TO_NAME_PAIR(REALLOC)
 };
 
 const static std::map<Command, std::string> command_name = {
@@ -67,7 +69,10 @@ const static std::map<Command, std::string> command_name = {
   MAKE_TO_STRING_PAIR(JMP),
   MAKE_TO_STRING_PAIR(JMPZ),
   MAKE_TO_STRING_PAIR(JMPI),
-  MAKE_TO_STRING_PAIR(DUP)
+  MAKE_TO_STRING_PAIR(DUP),
+  MAKE_TO_STRING_PAIR(ALLOC),
+  MAKE_TO_STRING_PAIR(FREE),
+  MAKE_TO_STRING_PAIR(REALLOC)
 };
 
 const static std::vector<Command> has_parameter = {

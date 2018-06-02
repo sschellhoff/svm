@@ -190,6 +190,22 @@ void VM::executeCommand() {
     case Command::DUP:
     memory.dup();
     break;
+    case Command::ALLOC: {
+      auto size = memory.pop();
+      memory.push(memory.reserveHeapSpace(size));
+    }
+    break;
+    case Command::FREE: {
+      auto address = memory.pop();
+      memory.removeHeapSpace(address);
+    }
+    break;
+    case Command::REALLOC: {
+      auto size = memory.pop();
+      auto address = memory.pop();
+      memory.push(memory.resizeHeapSpace(address, size));
+    }
+    break;
     default:
     // RUNTIME ERROR
     std::cerr << "unknown command: " << IR << std::endl;

@@ -31,5 +31,8 @@ enum Command : command_type {
   JMP,
   JMPZ,
   JMPI,
-  DUP
+  DUP,
+  ALLOC,
+  FREE,
+  REALLOC
 };
