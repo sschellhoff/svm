@@ -35,5 +35,7 @@ enum Command : command_type {
   DUP,
   ALLOC,
   FREE,
-  REALLOC
+  REALLOC,
+  CALL,
+  RET
 };

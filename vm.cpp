@@ -212,6 +212,21 @@ void VM::executeCommand() {
       memory.push(memory.resizeHeapSpace(address, size));
     }
     break;
+    case Command::CALL: {
+      fetchCommand(); // fetch address
+      auto address = IR; // get address
+      memory.push(BP);
+      memory.push((IP - &program[0]));
+      BP = memory.SP - memory.data;
+      IP = &program[0] + address;
+    }
+    break;
+    case Command::RET: {
+      auto _ip = memory.pop();
+      IP = &program[0] + _ip;
+      BP = memory.pop();
+    }
+    break;
     default:
     // RUNTIME ERROR
     std::cerr << "unknown command: " << IR << std::endl;
@@ -279,6 +294,6 @@ void VM::printRegisters() const {
   std::cout << "IP: " << (IP - &program[0]) << std::endl
   << "IR: " << IR << std::endl
   << "BP: " << BP << std::endl
-  << "SP: " << (memory.SP - memory.data)
+  << "SP: " << (memory.SP - memory.data) << std::endl
   << "HP: " << (memory.HP - memory.data) << std::endl;
 }

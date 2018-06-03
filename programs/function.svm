@@ -1,0 +1,6 @@
+CALL main
+HALT
+
+main:
+LOADC 1337
+RET
