@@ -11,6 +11,7 @@ const static std::map<std::string, Command> name_command = {
   MAKE_TO_NAME_PAIR(PUSH),
   MAKE_TO_NAME_PAIR(POP),
   MAKE_TO_NAME_PAIR(LOADC),
+  MAKE_TO_NAME_PAIR(LOADRC),
   MAKE_TO_NAME_PAIR(LOAD),
   MAKE_TO_NAME_PAIR(LOADN),
   MAKE_TO_NAME_PAIR(STORE),
@@ -46,6 +47,7 @@ const static std::map<Command, std::string> command_name = {
   MAKE_TO_STRING_PAIR(PUSH),
   MAKE_TO_STRING_PAIR(POP),
   MAKE_TO_STRING_PAIR(LOADC),
+  MAKE_TO_STRING_PAIR(LOADRC),
   MAKE_TO_STRING_PAIR(LOAD),
   MAKE_TO_STRING_PAIR(LOADN),
   MAKE_TO_STRING_PAIR(STORE),
@@ -77,7 +79,7 @@ const static std::map<Command, std::string> command_name = {
 };
 
 const static std::vector<Command> has_parameter = {
-  Command::PUSH, Command::POP, Command::LOADC, LOADN, STOREN, Command::JMP, Command::JMPZ, Command::JMPI
+  Command::PUSH, Command::POP, Command::LOADC, Command::LOADRC, LOADN, STOREN, Command::JMP, Command::JMPZ, Command::JMPI
 };
 
 bool doesCommandExist(const std::string &command) {

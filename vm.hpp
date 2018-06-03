@@ -10,7 +10,7 @@ private:
   std::vector<command_type> program;
   command_type* IP;
   std::size_t IR;
-  command_type* BP;
+  std::size_t BP;
 
   Stack memory;
 

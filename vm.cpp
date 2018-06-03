@@ -34,6 +34,12 @@ void VM::executeCommand() {
       memory.push(constant);
     }
     break;
+    case Command::LOADRC: {
+      fetchCommand(); // fetch constant
+      auto constant = IR; // get constant
+      memory.push(constant + BP);
+    }
+    break;
     case Command::LOAD: {
       auto var_addr = memory.pop();
       auto value = memory.load(var_addr);
@@ -225,7 +231,7 @@ void VM::resetVM() {
 
 void VM::restartProgram() {
   IP = &program[0];
-  BP = &memory.data[0];
+  BP = 0;
   is_running = true;
 }
 
@@ -272,7 +278,7 @@ void VM::printHeapEntries() const {
 void VM::printRegisters() const {
   std::cout << "IP: " << (IP - &program[0]) << std::endl
   << "IR: " << IR << std::endl
-  << "BP: " << (BP - &memory.data[0]) << std::endl
+  << "BP: " << BP << std::endl
   << "SP: " << (memory.SP - memory.data)
   << "HP: " << (memory.HP - memory.data) << std::endl;
 }
