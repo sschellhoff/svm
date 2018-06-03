@@ -41,7 +41,8 @@ const static std::map<std::string, Command> name_command = {
   MAKE_TO_NAME_PAIR(FREE),
   MAKE_TO_NAME_PAIR(REALLOC),
   MAKE_TO_NAME_PAIR(CALL),
-  MAKE_TO_NAME_PAIR(RET)
+  MAKE_TO_NAME_PAIR(RET),
+  MAKE_TO_NAME_PAIR(SYS)
 };
 
 const static std::map<Command, std::string> command_name = {
@@ -79,7 +80,8 @@ const static std::map<Command, std::string> command_name = {
   MAKE_TO_STRING_PAIR(FREE),
   MAKE_TO_STRING_PAIR(REALLOC),
   MAKE_TO_STRING_PAIR(CALL),
-  MAKE_TO_STRING_PAIR(RET)
+  MAKE_TO_STRING_PAIR(RET),
+  MAKE_TO_STRING_PAIR(SYS)
 };
 
 const static std::vector<Command> has_parameter = {

@@ -2,7 +2,7 @@
 #include "commands.hpp"
 #include <iostream>
 
-VM::VM() : is_running(false) {
+VM::VM() : is_running(false), sysCalls(memory) {
   memory.push(0);
 }
 
@@ -225,6 +225,11 @@ void VM::executeCommand() {
       auto _ip = memory.pop();
       IP = &program[0] + _ip;
       BP = memory.pop();
+    }
+    break;
+    case Command::SYS: {
+      auto instruction = memory.pop();
+      sysCalls.execute(instruction);
     }
     break;
     default:

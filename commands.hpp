@@ -37,5 +37,6 @@ enum Command : command_type {
   FREE,
   REALLOC,
   CALL,
-  RET
+  RET,
+  SYS
 };

@@ -3,6 +3,7 @@
 #include "types.hpp"
 #include "stack.hpp"
 #include <vector>
+#include "system_calls.hpp"
 
 class VM {
 private:
@@ -15,6 +16,8 @@ private:
   Stack memory;
 
   bool is_running;
+
+  SystemCalls sysCalls;
 
   void fetchCommand();
   void executeCommand();
