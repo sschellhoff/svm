@@ -20,6 +20,7 @@ private:
 
   void printStack() const;
   void printHeap() const;
+  void printHeapEntries() const;
   void printRegisters() const;
 public:
   VM();

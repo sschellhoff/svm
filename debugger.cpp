@@ -24,6 +24,7 @@ void Debugger::run() {
   cli.registerCommand("inspect", [this]() { this->printCurrentCommand(); });
   cli.registerCommand("stack", [this]() { this->vm.printStack(); });
   cli.registerCommand("heap", [this]() { this->vm.printHeap(); });
+  cli.registerCommand("allocated", [this]() { this->vm.printHeapEntries(); });
   cli.registerCommand("registers", [this]() { this->vm.printRegisters(); });
   cli.registerCommand("show", [this]() { this->vm.printRegisters(); this->vm.printStack(); this->vm.printHeap(); this->printCurrentCommand(); });
   cli.registerCommand("", []() { });
@@ -35,6 +36,7 @@ void Debugger::run() {
 }
 
 void Debugger::debugStep() {
+  if(!vm.is_running) return;
   printCurrentCommand();
   vm.fetchCommand();
   vm.executeCommand();

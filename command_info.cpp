@@ -35,6 +35,7 @@ const static std::map<std::string, Command> name_command = {
   MAKE_TO_NAME_PAIR(JMP),
   MAKE_TO_NAME_PAIR(JMPZ),
   MAKE_TO_NAME_PAIR(JMPI),
+  MAKE_TO_NAME_PAIR(DUP),
   MAKE_TO_NAME_PAIR(ALLOC),
   MAKE_TO_NAME_PAIR(FREE),
   MAKE_TO_NAME_PAIR(REALLOC)

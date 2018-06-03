@@ -1,0 +1,17 @@
+struct t { int a[3]; struct t *b; }; // size = 4
+
+int i, j; // size = 2
+t *pt; // size = 1
+
+i = 1;
+
+j = 9;
+
+pt = new t; // size = 4
+
+pt->a[0] = 1;
+pt->a[1] = 2;
+pt->a[2] = 3;
+pt->b = &pt;
+
+pt->b->a[i + 1]

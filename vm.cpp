@@ -262,6 +262,12 @@ void VM::printHeap() const {
   std::cout << "]" << std::endl;
 }
 
+void VM::printHeapEntries() const {
+  for(auto &elem : memory.heapEntries) {
+    std::cout << elem.address << " " << elem.size << std::endl;
+  }
+}
+
 void VM::printRegisters() const {
   std::cout << "IP: " << (IP - &program[0]) << std::endl
   << "IR: " << IR << std::endl
