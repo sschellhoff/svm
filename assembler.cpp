@@ -74,10 +74,18 @@ std::vector<command_type> assemble(const std::string & program) {
       continue;
     }
 
+    if(current == '-') {
+      pos++;
+      if(pos >= program.length()) {
+        std::cerr << "Unknown token" << std::endl;
+        return error_program();
+      }
+      current = program[pos];
+    }
     if(std::isdigit(current)) {
       for(;pos < program.length() && std::isdigit(current); current = program[++pos]) {
       }
-      auto value = std::stoi(program.substr(start_pos, pos-start_pos));
+      int_type value = std::stoi(program.substr(start_pos, pos-start_pos));
       Token no(TokenType::NUMBER);
       no.value.no = value;
       tokens.push_back(no);

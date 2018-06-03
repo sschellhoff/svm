@@ -1,6 +1,14 @@
 CALL main
 HALT
 
-main:
+somefunction:
 LOADC 1337
+LOADRC -3
+STORE
+RET
+
+main:
+PUSH 1
+CALL somefunction
+POP 1
 RET
