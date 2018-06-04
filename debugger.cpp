@@ -44,11 +44,11 @@ void Debugger::debugStep() {
 
 void Debugger::runUntilBreakpoint() {
   while(vm.is_running) {
+    vm.executeStep();
     auto address = vm.IP;
     if(std::find(breakpoints.begin(), breakpoints.end(), address) != breakpoints.end()) {
       return;
     }
-    vm.executeStep();
   }
 }
 
